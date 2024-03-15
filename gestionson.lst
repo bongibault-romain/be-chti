@@ -17,29 +17,37 @@ ARM Macro Assembler    Page 1
    10 00000000         ;Section RAM (read write):
    11 00000000                 area             maram,data,readwrite
    12 00000000         
-   13 00000000         
-   14 00000000         
-   15 00000000         ; ======================================================
+   13 00000000                 export           GestionSon_Index
+   14 00000000 00000000 
+                       GestionSon_Index
+                               dcd              0
+   15 00000004         
+   16 00000004         ; ======================================================
                        =========================================
-   16 00000000         
-   17 00000000         
-   18 00000000         
-   19 00000000         
-   20 00000000         ;Section ROM code (read only) :  
-   21 00000000                 area             moncode,code,readonly
-   22 00000000         ; écrire le code ici
-   23 00000000                 export           GestionSon_callback
+   17 00000004         
+   18 00000004         
+   19 00000004         
+   20 00000004         
+   21 00000004         ;Section ROM code (read only) :  
+   22 00000004                 area             moncode,code,readonly
+   23 00000000         ; écrire le code ici
    24 00000000         
-   25 00000000         GestionSon_callback
-   26 00000000 4600            mov              r0,r0
-   27 00000002 4770            bx               lr
-   28 00000004         
-   29 00000004         
-   30 00000004         
-   31 00000004         
-   32 00000004         
-   33 00000004         
-   34 00000004                 END
+   25 00000000                 export           GestionSon_callback
+   26 00000000         
+   27 00000000         GestionSon_callback
+   28 00000000 4902            ldr              r1, =GestionSon_Index
+   29 00000002 6808            ldr              r0,[r1]
+   30 00000004 F100 0001       add              r0,#1
+   31 00000008 6008            str              r0,[r1]
+   32 0000000A 4770            bx               lr
+   33 0000000C         
+   34 0000000C         
+   35 0000000C         
+   36 0000000C         
+   37 0000000C         
+   38 0000000C         
+   39 0000000C                 END
+              00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=.\obj\gestionson.d -o.\obj\gestionson.o -I.\RTE\_Simu -IC:\Program
 data\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include -IC:\Programdata\Keil\Ar
@@ -68,6 +76,15 @@ Comment: mesdata unused
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Relocatable symbols
 
+GestionSon_Index 00000000
+
+Symbol: GestionSon_Index
+   Definitions
+      At line 14 in file GestionSon\GestionSon.s
+   Uses
+      At line 13 in file GestionSon\GestionSon.s
+      At line 28 in file GestionSon\GestionSon.s
+
 maram 00000000
 
 Symbol: maram
@@ -76,7 +93,7 @@ Symbol: maram
    Uses
       None
 Comment: maram unused
-1 symbol
+2 symbols
 
 
 
@@ -87,17 +104,17 @@ GestionSon_callback 00000000
 
 Symbol: GestionSon_callback
    Definitions
-      At line 25 in file GestionSon\GestionSon.s
+      At line 27 in file GestionSon\GestionSon.s
    Uses
-      At line 23 in file GestionSon\GestionSon.s
+      At line 25 in file GestionSon\GestionSon.s
 Comment: GestionSon_callback used once
 moncode 00000000
 
 Symbol: moncode
    Definitions
-      At line 21 in file GestionSon\GestionSon.s
+      At line 22 in file GestionSon\GestionSon.s
    Uses
       None
 Comment: moncode unused
 2 symbols
-339 symbols in table
+342 symbols in table
