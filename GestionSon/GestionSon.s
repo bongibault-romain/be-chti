@@ -27,7 +27,20 @@ GestionSon_Index dcd 0
 	import Son
 
 	export GestionSon_callback
-	
+
+; extern Son;
+; extern LongueurSon;
+; extern GestionSon_Index;
+;
+; GestionSon_Index = GestionSon_Index + 1;
+; if (GestionSon_Index == Longueur_Son) {
+; 	GestionSon_Index = 0;
+; }
+;
+; int Echelle = ((Son[GestionSon_Index] + 32768) * 720) / 65536;
+;
+; return;
+
 GestionSon_callback
 	ldr r1, =GestionSon_Index
 	ldr r0,[r1]
