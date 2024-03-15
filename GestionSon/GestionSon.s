@@ -38,11 +38,12 @@ GestionSon_callback
 	add r0,#1
 	
 	cmp r0, r3
-	beq Not_Reset
-	mov r0,#0
+	bne Not_Reset
+	mov r0,#0 		;l'index est reset
 
 Not_Reset
-	str r0,[r1]
+	str r0,[r1] 	;l'index est mis à jour
+	
 	bx lr
 
 
