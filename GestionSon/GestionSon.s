@@ -19,8 +19,12 @@
 		
 ;Section ROM code (read only) :		
 	area    moncode,code,readonly
-; écrire le code ici		
-
+; écrire le code ici
+	export GestionSon_callback
+	
+GestionSon_callback
+	mov r0,r0
+	bx lr
 
 
 
