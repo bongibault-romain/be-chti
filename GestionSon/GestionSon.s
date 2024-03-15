@@ -23,12 +23,25 @@ GestionSon_Index dcd 0
 	area    moncode,code,readonly
 ; écrire le code ici
 
+	import LongueurSon
+	import Son
+
 	export GestionSon_callback
 	
 GestionSon_callback
 	ldr r1, =GestionSon_Index
 	ldr r0,[r1]
+	
+	ldr r2, =LongueurSon
+	ldr r3, [r2]
+	
 	add r0,#1
+	
+	cmp r0, r3
+	beq Not_Reset
+	mov r0,#0
+
+Not_Reset
 	str r0,[r1]
 	bx lr
 
