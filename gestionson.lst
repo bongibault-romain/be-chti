@@ -26,81 +26,115 @@ ARM Macro Assembler    Page 1
                                dcw              0
    17 00000006         
    18 00000006         
-   19 00000006         
-   20 00000006         ; ======================================================
+   19 00000006         ; ======================================================
                        =========================================
+   20 00000006         
    21 00000006         
    22 00000006         
-   23 00000006         
-   24 00000006         
-   25 00000006         ;Section ROM code (read only) :  
-   26 00000006                 area             moncode,code,readonly
-   27 00000000         ; écrire le code ici
-   28 00000000         
-   29 00000000                 import           LongueurSon
-   30 00000000                 import           Son
-   31 00000000         
-   32 00000000                 export           GestionSon_callback
-   33 00000000         
-   34 00000000         ; extern Son;
-   35 00000000         ; extern LongueurSon;
-   36 00000000         ; extern GestionSon_Index;
-   37 00000000         ;
-   38 00000000         ; if (GestionSon_Index < Longueur_Son) {
-   39 00000000         ;  GestionSon_Index = GestionSon_Index + 1;
-   40 00000000         ;  int Echelle = ((Son[GestionSon_Index] + 32768) * 720)
+   23 00000006         ;Section ROM code (read only) :  
+   24 00000006                 area             moncode,code,readonly
+   25 00000000         ; écrire le code ici
+   26 00000000         
+   27 00000000                 import           LongueurSon
+   28 00000000                 import           Son
+   29 00000000                 import           PWM_Set_Value_TIM3_Ch3
+   30 00000000         
+   31 00000000                 export           GestionSon_Callback
+   32 00000000         
+   33 00000000         ; extern Son;
+   34 00000000         ; extern LongueurSon;
+   35 00000000         ; extern GestionSon_Index;
+   36 00000000         ;
+   37 00000000         ; if (GestionSon_Index < Longueur_Son) {
+   38 00000000         ;  int Echelle = ((Son[GestionSon_Index] + 32768) * 720)
                         / 65536;
-   41 00000000         ; }
-   42 00000000         ;
-   43 00000000         ; 
+   39 00000000         ;  GestionSon_Index = GestionSon_Index + 1;
+   40 00000000         ;  SortieSon = Echelle;
+   41 00000000         ; } else {
+   42 00000000         ; SortieSon = 0;
+   43 00000000         ; }
    44 00000000         ;
-   45 00000000         ; return;
-   46 00000000         
-   47 00000000         GestionSon_callback
-   48 00000000 490B            ldr              r1, =GestionSon_Index
-   49 00000002 6808            ldr              r0,[r1]
-   50 00000004         
-   51 00000004 4A0B            ldr              r2, =LongueurSon
-   52 00000006 6813            ldr              r3, [r2]
-   53 00000008         
+   45 00000000         ; 
+   46 00000000         ;
+   47 00000000         ; return;
+   48 00000000         
+   49 00000000         GestionSon_Callback
+   50 00000000 4915            ldr              r1, =GestionSon_Index
+   51 00000002 6808            ldr              r0,[r1]
+   52 00000004         
+   53 00000004 4A15            ldr              r2, =LongueurSon
 
 
 
 ARM Macro Assembler    Page 2 
 
 
-   54 00000008 4298            cmp              r0, r3
-   55 0000000A DD00            ble              Not_Stop
-   56 0000000C 4770            bx               lr
-   57 0000000E         
-   58 0000000E         Not_Stop
-   59 0000000E F100 0001       add              r0,#1       ;l'index est reset
-   60 00000012 6008            str              r0,[r1]     ;l'index est mis à 
-                                                            jour
-   61 00000014         
-   62 00000014 4A08            ldr              r2,=Son
-   63 00000016 F832 3010       ldrh             r3, [r2, r0, LSL #1]
-   64 0000001A F503 4300       add              r3, #32768
-   65 0000001E F44F 7134       mov              r1, #720
-   66 00000022 FB03 F301       mul              r3, r1
-   67 00000026 EA4F 4303       lsl              r3, r3, #16
-   68 0000002A         
-   69 0000002A 4904            ldr              r1, =SortieSon
-   70 0000002C 600B            str              r3, [r1]
-   71 0000002E 4770            bx               lr
-   72 00000030         
-   73 00000030                 END
-              00000000 
+   54 00000006 6813            ldr              r3, [r2]
+   55 00000008         
+   56 00000008         ; si Longueur_Son <= GestionSon_Index
+   57 00000008 4283            cmp              r3, r0
+   58 0000000A F04F 0300       mov              r3, #0
+   59 0000000E DD0F            ble              Return
+   60 00000010         
+   61 00000010         ; récupération du tableau Son
+   62 00000010 4A13            ldr              r2,=Son
+   63 00000012 F832 3010       ldrh             r3, [r2, r0, LSL #1]
+   64 00000016         ; extension du bit de signe sur 32 bits
+   65 00000016 B21B            sxth             r3, r3
+   66 00000018         
+   67 00000018         ; calculs pour la remise à l'échelle
+   68 00000018 F503 4300       add              r3, #32768
+   69 0000001C F44F 7034       mov              r0, #720
+   70 00000020 FB03 F300       mul              r3, r0
+   71 00000024 EA4F 4313       lsr              r3, r3, #16
+   72 00000028         
+   73 00000028         ; post incrémentation du compteur
+   74 00000028 6808            ldr              r0,[r1]
+   75 0000002A F100 0001       add              r0,#1
+   76 0000002E 6008            str              r0,[r1]
+   77 00000030         Return
+   78 00000030         ; mise à jour de SortieSon
+   79 00000030 490C            ldr              r1, =SortieSon
+   80 00000032 600B            str              r3, [r1]
+   81 00000034         
+   82 00000034 B500            push             {lr}
+   83 00000036 4618            mov              r0, r3
+   84 00000038 F7FF FFFE       bl               PWM_Set_Value_TIM3_Ch3
+   85 0000003C F85D EB04       pop              {lr}
+   86 00000040         
+   87 00000040 4770            bx               lr
+   88 00000042         
+   89 00000042         GestionSon_Start
+   90 00000042 4905            ldr              r1, =GestionSon_Index
+   91 00000044 F04F 0200       mov              r2, #0
+   92 00000048 600A            str              r2, [r1]
+   93 0000004A 4770            bx               lr
+   94 0000004C         
+   95 0000004C         GestionSon_Stop
+   96 0000004C 4902            ldr              r1, =GestionSon_Index
+   97 0000004E 4A03            ldr              r2, =LongueurSon
+   98 00000050 6812            ldr              r2, [r2]
+   99 00000052 600A            str              r2, [r1]
+  100 00000054 4770            bx               lr
+  101 00000056         
+  102 00000056                 END
+              00 00 00000000 
               00000000 
               00000000 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
-ork --depend=.\obj\gestionson.d -o.\obj\gestionson.o -I.\RTE\_Simu -IC:\Program
-data\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include -IC:\Programdata\Keil\Ar
-m\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include --predefine="__EVAL SETA 1" --p
-redefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 534" --predefi
-ne="_RTE_ SETA 1" --predefine="STM32F10X_MD SETA 1" --predefine="_RTE_ SETA 1" 
---list=gestionson.lst GestionSon\GestionSon.s
+ork --depend=.\obj\gestionson.d -o.\obj\gestionson.o -I.\RTE\_Simu -ID:\Users\R
+omain\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include -ID:\Users\Rom
+ain\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include --predefine
+="__EVAL SETA 1" --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION
+ SETA 539" --predefine="_RTE_ SETA 1" --predefine="STM32F10X_MD SETA 1" --prede
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+fine="_RTE_ SETA 1" --list=gestionson.lst GestionSon\GestionSon.s
 
 
 
@@ -129,7 +163,9 @@ Symbol: GestionSon_Index
       At line 15 in file GestionSon\GestionSon.s
    Uses
       At line 12 in file GestionSon\GestionSon.s
-      At line 48 in file GestionSon\GestionSon.s
+      At line 50 in file GestionSon\GestionSon.s
+      At line 90 in file GestionSon\GestionSon.s
+      At line 96 in file GestionSon\GestionSon.s
 
 SortieSon 00000004
 
@@ -138,7 +174,7 @@ Symbol: SortieSon
       At line 16 in file GestionSon\GestionSon.s
    Uses
       At line 13 in file GestionSon\GestionSon.s
-      At line 69 in file GestionSon\GestionSon.s
+      At line 79 in file GestionSon\GestionSon.s
 
 maram 00000000
 
@@ -155,31 +191,47 @@ Comment: maram unused
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Relocatable symbols
 
-GestionSon_callback 00000000
+GestionSon_Callback 00000000
 
-Symbol: GestionSon_callback
+Symbol: GestionSon_Callback
    Definitions
-      At line 47 in file GestionSon\GestionSon.s
+      At line 49 in file GestionSon\GestionSon.s
    Uses
-      At line 32 in file GestionSon\GestionSon.s
-Comment: GestionSon_callback used once
-Not_Stop 0000000E
+      At line 31 in file GestionSon\GestionSon.s
+Comment: GestionSon_Callback used once
+GestionSon_Start 00000042
 
-Symbol: Not_Stop
+Symbol: GestionSon_Start
    Definitions
-      At line 58 in file GestionSon\GestionSon.s
+      At line 89 in file GestionSon\GestionSon.s
    Uses
-      At line 55 in file GestionSon\GestionSon.s
-Comment: Not_Stop used once
+      None
+Comment: GestionSon_Start unused
+GestionSon_Stop 0000004C
+
+Symbol: GestionSon_Stop
+   Definitions
+      At line 95 in file GestionSon\GestionSon.s
+   Uses
+      None
+Comment: GestionSon_Stop unused
+Return 00000030
+
+Symbol: Return
+   Definitions
+      At line 77 in file GestionSon\GestionSon.s
+   Uses
+      At line 59 in file GestionSon\GestionSon.s
+Comment: Return used once
 moncode 00000000
 
 Symbol: moncode
    Definitions
-      At line 26 in file GestionSon\GestionSon.s
+      At line 24 in file GestionSon\GestionSon.s
    Uses
       None
 Comment: moncode unused
-3 symbols
+5 symbols
 
 
 
@@ -190,17 +242,26 @@ LongueurSon 00000000
 
 Symbol: LongueurSon
    Definitions
+      At line 27 in file GestionSon\GestionSon.s
+   Uses
+      At line 53 in file GestionSon\GestionSon.s
+      At line 97 in file GestionSon\GestionSon.s
+
+PWM_Set_Value_TIM3_Ch3 00000000
+
+Symbol: PWM_Set_Value_TIM3_Ch3
+   Definitions
       At line 29 in file GestionSon\GestionSon.s
    Uses
-      At line 51 in file GestionSon\GestionSon.s
-Comment: LongueurSon used once
+      At line 84 in file GestionSon\GestionSon.s
+Comment: PWM_Set_Value_TIM3_Ch3 used once
 Son 00000000
 
 Symbol: Son
    Definitions
-      At line 30 in file GestionSon\GestionSon.s
+      At line 28 in file GestionSon\GestionSon.s
    Uses
       At line 62 in file GestionSon\GestionSon.s
 Comment: Son used once
-2 symbols
-346 symbols in table
+3 symbols
+349 symbols in table
