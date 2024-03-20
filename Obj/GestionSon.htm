@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Obj\GestionSon.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Obj\GestionSon.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat Mar 16 12:18:19 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Wed Mar 20 11:22:28 2024
 <BR><P>
 <H3>Maximum Stack Usage =         24 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -13,6 +13,8 @@ main &rArr; ServJeuLASER_Systick_IT_Init
 Functions with no stack information
 </H3><UL>
  <LI><a href="#[38]">GestionSon_Callback</a>
+ <LI><a href="#[4d]">GestionSon_Start</a>
+ <LI><a href="#[4e]">GestionSon_Stop</a>
 </UL>
 </UL>
 <P>
@@ -380,7 +382,11 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PWM_Set_Value_TIM3_Ch3
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> principal.o(i.main)
-</UL><P>
+</UL>
+<P><STRONG><a name="[4d]"></a>GestionSon_Start</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gestionson.o(moncode), UNUSED)
+
+<P><STRONG><a name="[4e]"></a>GestionSon_Stop</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, gestionson.o(moncode), UNUSED)
+<P>
 <H3>
 Local Symbols
 </H3>

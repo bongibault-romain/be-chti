@@ -47,7 +47,6 @@ SortieSon dcw 0
 ; 
 ;
 ; return;
-
 GestionSon_Callback
 	ldr r1, =GestionSon_Index
 	ldr r0,[r1]
@@ -57,7 +56,7 @@ GestionSon_Callback
 	
 	; si Longueur_Son <= GestionSon_Index
 	cmp r3, r0
-	mov r3, #0
+	mov r3, #360
 	ble Return
 	
 	; récupération du tableau Son

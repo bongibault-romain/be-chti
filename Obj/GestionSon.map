@@ -432,6 +432,8 @@ Image Symbol Table
     __scatterload_zeroinit                   0x08000785   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
     main                                     0x08000795   Thumb Code    20  principal.o(i.main)
     GestionSon_Callback                      0x080007b1   Thumb Code     0  gestionson.o(moncode)
+    GestionSon_Start                         0x080007f3   Thumb Code     0  gestionson.o(moncode)
+    GestionSon_Stop                          0x080007fd   Thumb Code     0  gestionson.o(moncode)
     Region$$Table$$Base                      0x08000818   Number         0  anon$$obj.o(Region$$Table)
     LongueurSon                              0x08000838   Data           4  bruitverre.o(SecSon)
     Region$$Table$$Limit                     0x08000838   Number         0  anon$$obj.o(Region$$Table)
