@@ -12,7 +12,7 @@
 	export GestionSon_Index
 	export SortieSon
 		
-GestionSon_Index dcd 0
+GestionSon_Index dcd 5512
 SortieSon dcw 0
 
 

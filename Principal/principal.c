@@ -4,8 +4,13 @@
 #include "ServiceJeuLaser.h"
 #include "principal.h"
 #include "./../GestionSon.h"
+#include "./../DFT/DFT.h"
 
 extern int PeriodeSonMicroSec;
+
+extern float LeSignal[64];
+
+static float SortieSignal = 0;
 
 int main(void)
 {
@@ -18,13 +23,15 @@ CLOCK_Configure();
 
 ServJeuLASER_Son_Init(PeriodeSonMicroSec ,0,GestionSon_Callback);
 
+	
 /* Configuration du son (voir ServiceJeuLaser.h) 
  Insérez votre code d'initialisation des parties matérielles gérant le son ....*/	
 	
 
 //============================================================================	
-	
-
+	for(int k=0;k<64;k++){
+		SortieSignal = DFT(k, LeSignal);
+	}
 
 	
 while	(1)
