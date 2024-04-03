@@ -3,9 +3,11 @@
 
 #define M 64
 
-extern float TabSin[64];
-extern float TabCos[64];
+extern short TabSin[64];
+extern short TabCos[64];
 
-float DFT(int k, float echantillon [M]);
+float convert(int a);
+
+short DFT(int k, short echantillon [M]);
 
 #endif

@@ -47,7 +47,7 @@ SortieSon dcw 0
 ; 
 ;
 ; return;
-GestionSon_Callback
+GestionSon_Callback proc
 	ldr r1, =GestionSon_Index
 	ldr r0,[r1]
 	
@@ -86,18 +86,21 @@ Return
 	pop {lr}
 	
 	bx lr
+	endp
 	
-GestionSon_Start
+GestionSon_Start proc
 	ldr r1, =GestionSon_Index
 	mov r2, #0
 	str r2, [r1]
 	bx lr
-	
-GestionSon_Stop
+	endp
+		
+GestionSon_Stop proc
 	ldr r1, =GestionSon_Index
 	ldr r2, =LongueurSon
 	ldr r2, [r2]
 	str r2, [r1]
 	bx lr
+	endp
 	
 	END	

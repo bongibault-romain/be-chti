@@ -60,15 +60,16 @@ ARM Macro Assembler    Page 1
    48 00000000         ;
    49 00000000         ; return;
    50 00000000         GestionSon_Callback
+                               proc
    51 00000000 4915            ldr              r1, =GestionSon_Index
    52 00000002 6808            ldr              r0,[r1]
-   53 00000004         
 
 
 
 ARM Macro Assembler    Page 2 
 
 
+   53 00000004         
    54 00000004 4A15            ldr              r2, =LongueurSon
    55 00000006 6813            ldr              r3, [r2]
    56 00000008         
@@ -104,36 +105,41 @@ ARM Macro Assembler    Page 2
    86 0000003C F85D EB04       pop              {lr}
    87 00000040         
    88 00000040 4770            bx               lr
-   89 00000042         
-   90 00000042         GestionSon_Start
-   91 00000042 4905            ldr              r1, =GestionSon_Index
-   92 00000044 F04F 0200       mov              r2, #0
-   93 00000048 600A            str              r2, [r1]
-   94 0000004A 4770            bx               lr
-   95 0000004C         
-   96 0000004C         GestionSon_Stop
-   97 0000004C 4902            ldr              r1, =GestionSon_Index
-   98 0000004E 4A03            ldr              r2, =LongueurSon
-   99 00000050 6812            ldr              r2, [r2]
-  100 00000052 600A            str              r2, [r1]
-  101 00000054 4770            bx               lr
-  102 00000056         
-  103 00000056                 END
+   89 00000042                 endp
+   90 00000042         
+   91 00000042         GestionSon_Start
+                               proc
+   92 00000042 4905            ldr              r1, =GestionSon_Index
+   93 00000044 F04F 0200       mov              r2, #0
+   94 00000048 600A            str              r2, [r1]
+   95 0000004A 4770            bx               lr
+   96 0000004C                 endp
+   97 0000004C         
+   98 0000004C         GestionSon_Stop
+                               proc
+   99 0000004C 4902            ldr              r1, =GestionSon_Index
+  100 0000004E 4A03            ldr              r2, =LongueurSon
+  101 00000050 6812            ldr              r2, [r2]
+  102 00000052 600A            str              r2, [r1]
+  103 00000054 4770            bx               lr
+  104 00000056                 endp
+  105 00000056         
+  106 00000056                 END
               00 00 00000000 
               00000000 
               00000000 
-              00000000 
-Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
-ork --depend=.\obj\gestionson.d -o.\obj\gestionson.o -I.\RTE\_Simu -IC:\Program
-data\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include -IC:\Programdata\Keil\Ar
-m\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include --predefine="__EVAL SETA 1" --p
-redefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 534" --predefi
 
 
 
 ARM Macro Assembler    Page 3 
 
 
+              00000000 
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
+ork --depend=.\obj\gestionson.d -o.\obj\gestionson.o -I.\RTE\_Simu -IC:\Program
+data\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include -IC:\Programdata\Keil\Ar
+m\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include --predefine="__EVAL SETA 1" --p
+redefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 534" --predefi
 ne="_RTE_ SETA 1" --predefine="STM32F10X_MD SETA 1" --predefine="_RTE_ SETA 1" 
 --list=gestionson.lst GestionSon\GestionSon.s
 
@@ -165,8 +171,8 @@ Symbol: GestionSon_Index
    Uses
       At line 12 in file GestionSon\GestionSon.s
       At line 51 in file GestionSon\GestionSon.s
-      At line 91 in file GestionSon\GestionSon.s
-      At line 97 in file GestionSon\GestionSon.s
+      At line 92 in file GestionSon\GestionSon.s
+      At line 99 in file GestionSon\GestionSon.s
 
 SortieSon 00000004
 
@@ -204,7 +210,7 @@ GestionSon_Start 00000042
 
 Symbol: GestionSon_Start
    Definitions
-      At line 90 in file GestionSon\GestionSon.s
+      At line 91 in file GestionSon\GestionSon.s
    Uses
       At line 32 in file GestionSon\GestionSon.s
 Comment: GestionSon_Start used once
@@ -212,7 +218,7 @@ GestionSon_Stop 0000004C
 
 Symbol: GestionSon_Stop
    Definitions
-      At line 96 in file GestionSon\GestionSon.s
+      At line 98 in file GestionSon\GestionSon.s
    Uses
       At line 33 in file GestionSon\GestionSon.s
 Comment: GestionSon_Stop used once
@@ -246,7 +252,7 @@ Symbol: LongueurSon
       At line 27 in file GestionSon\GestionSon.s
    Uses
       At line 54 in file GestionSon\GestionSon.s
-      At line 98 in file GestionSon\GestionSon.s
+      At line 100 in file GestionSon\GestionSon.s
 
 PWM_Set_Value_TIM3_Ch3 00000000
 

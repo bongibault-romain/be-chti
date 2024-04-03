@@ -317,9 +317,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>33</LineNumber>
+          <LineNumber>36</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134221072</Address>
+          <Address>134220894</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -328,12 +328,12 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>.\Principal\principal.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\GestionSon\Principal/principal.c\33</Expression>
+          <Expression>\\GestionSon\Principal/principal.c\36</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>34</LineNumber>
+          <LineNumber>37</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -351,9 +351,26 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>GestionSon_Index</ItemText>
+          <ItemText>dfts</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>real</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>im</ItemText>
         </Ww>
       </WatchWindow1>
+      <WatchWindow2>
+        <Ww>
+          <count>0</count>
+          <WinNumber>2</WinNumber>
+          <ItemText>im</ItemText>
+        </Ww>
+      </WatchWindow2>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>
@@ -374,7 +391,7 @@
         <AscS3>0</AscS3>
         <aSer3>0</aSer3>
         <eProf>0</eProf>
-        <aLa>1</aLa>
+        <aLa>0</aLa>
         <aPa1>0</aPa1>
         <AscS4>0</AscS4>
         <aSer4>0</aSer4>
@@ -408,7 +425,7 @@
 
   <Group>
     <GroupName>Principal</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -523,32 +540,32 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\Service_DFT_float\CosSin_float.c</PathWithFileName>
-      <FilenameWithoutPath>CosSin_float.c</FilenameWithoutPath>
+      <PathWithFileName>.\DFT\DFT.c</PathWithFileName>
+      <FilenameWithoutPath>DFT.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
       <FileNumber>8</FileNumber>
-      <FileType>1</FileType>
+      <FileType>2</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\Service_DFT_float\Signal_float.c</PathWithFileName>
-      <FilenameWithoutPath>Signal_float.c</FilenameWithoutPath>
+      <PathWithFileName>.\Service_DFT_Fract\CosSin_Fract_1_15.asm</PathWithFileName>
+      <FilenameWithoutPath>CosSin_Fract_1_15.asm</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
       <FileNumber>9</FileNumber>
-      <FileType>1</FileType>
+      <FileType>2</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\DFT\DFT.c</PathWithFileName>
-      <FilenameWithoutPath>DFT.c</FilenameWithoutPath>
+      <PathWithFileName>.\Service_DFT_Fract\Signal_4_12.asm</PathWithFileName>
+      <FilenameWithoutPath>Signal_4_12.asm</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

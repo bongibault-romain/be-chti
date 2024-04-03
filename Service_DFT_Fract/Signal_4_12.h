@@ -3,7 +3,7 @@
 #define SIGNAL_H__
 
 
-extern float LeSignal[64];
+extern unsigned short int LeSignal[64];
 
 
 #endif
