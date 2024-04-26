@@ -11,6 +11,7 @@ extern int PeriodeSonMicroSec;
 extern short LeSignal[64];
 
 static float dfts[64];
+static int sdfts[64];
 
 int main(void)
 {
@@ -30,7 +31,8 @@ ServJeuLASER_Son_Init(PeriodeSonMicroSec ,0,GestionSon_Callback);
 
 //============================================================================	
 	for(int k=0;k<64;k++){
-		dfts[k] = convert(DFT(k, LeSignal));
+		sdfts[k] = DFT(k, LeSignal);
+		dfts[k] = convert(sdfts[k]);
 	}
 
 while	(1)

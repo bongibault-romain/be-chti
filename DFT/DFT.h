@@ -8,6 +8,6 @@ extern short TabCos[64];
 
 float convert(int a);
 
-short DFT(int k, short echantillon [M]);
+int DFT(int k, short echantillon [M]);
 
 #endif

@@ -1,24 +1,21 @@
 #include "DFT.h"
 
-int multiply(short a, short b) {
-	int atemp = a;
-	int result = (atemp << 3)* b;
-	
-	return result;
-}
-
 float convert(int a) {
-	return (float) a / (1 << 27);
+	unsigned int b = (unsigned int) a;
+	
+	return ((float) b) / (1 << 22);
 }
 
-short DFT(int k, short echantillon [M]) {
-	int real = 0;
-	int im = 0;
+int DFT(int k, short echantillon[M]) {
+	long long real = 0;
+	long long im = 0;
 	
 	for (int i = 0; i < M; i++){
-		real = real + multiply(echantillon[i], TabCos[(k*i) % 64]);
-		im = im + multiply(echantillon[i], TabSin[(k*i) % 64]);
+		int echan = ((int) echantillon[i]) << 3;
+		
+		real = real + echan * TabCos[(k*i) & 63]; // & 63 / equivalent mod 64
+		im = im + echan * TabSin[(k*i) & 63];
 	}
 	
-	return real * real + im * im;
+	return (real * real + im * im) >> 32;
 }
