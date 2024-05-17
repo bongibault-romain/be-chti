@@ -451,6 +451,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Affichage</GroupName>
+          <Files>
+            <File>
+              <FileName>affichage_valise.o</FileName>
+              <FileType>3</FileType>
+              <FilePath>.\Affichage\affichage_valise.o</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
           <GroupOption>
             <CommonProperty>
@@ -965,6 +975,16 @@
               <FileName>Signal_4_12.asm</FileName>
               <FileType>2</FileType>
               <FilePath>.\Service_DFT_Fract\Signal_4_12.asm</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Affichage</GroupName>
+          <Files>
+            <File>
+              <FileName>affichage_valise.o</FileName>
+              <FileType>3</FileType>
+              <FilePath>.\Affichage\affichage_valise.o</FilePath>
             </File>
           </Files>
         </Group>

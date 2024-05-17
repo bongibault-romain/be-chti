@@ -13,3 +13,4 @@
 .\obj\principal.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\obj\principal.o: Principal\./../GestionSon.h
 .\obj\principal.o: Principal\./../DFT/DFT.h
+.\obj\principal.o: Principal\./../Affichage/Affichage_Valise.h
