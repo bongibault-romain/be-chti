@@ -14,9 +14,9 @@ ARM Macro Assembler    Page 1
     8 00000000                 export           PeriodeSonMicroSec
     9 00000000                 export           Son
    10 00000000         
-   11 00000000 00001588 
+   11 00000000 00001589 
                        LongueurSon
-                               DCD              5512
+                               DCD              5513
    12 00000004 0000005B 
                        PeriodeSonMicroSec
                                DCD              91
@@ -6091,7 +6091,8 @@ ARM Macro Assembler    Page 94
  5523 00002B12 58 00           DCW              88
  5524 00002B14 F1 F4           DCW              -2831
  5525 00002B16 06 F7           DCW              -2298
- 5526 00002B18                 END
+ 5526 00002B18 00 80           DCW              -32768
+ 5527 00002B1A                 END
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=.\obj\bruitverre.d -o.\obj\bruitverre.o -I.\RTE\_CibleSondeKEIL -I
 C:\Programdata\Keil\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include -IC:\Programda

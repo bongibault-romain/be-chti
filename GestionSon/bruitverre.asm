@@ -8,7 +8,7 @@
 		 export PeriodeSonMicroSec
 		 export Son
 		 
-LongueurSon	 DCD 5512 
+LongueurSon	 DCD 5513 
 PeriodeSonMicroSec	 DCD 91 
 Son 
 	 DCW 	   -6911
@@ -5523,5 +5523,6 @@ Son
 	 DCW 	      88
 	 DCW 	   -2831
 	 DCW 	   -2298
+	 DCW 	  -32768	
 	END     
  
